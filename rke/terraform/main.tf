@@ -30,10 +30,10 @@ resource "aws_key_pair" "rke" {
 module "vpc" {
   source = "./modules/vpc"
 
-  name                     = local.name
-  availability_zone        = local.availability_zone
-  vpc_cidr_block           = local.vpc_cidr_block
-  public_subnet_cidr_block = loca.subnet_cidr_block
+  name              = local.name
+  availability_zone = local.availability_zone
+  vpc_cidr_block    = local.vpc_cidr_block
+  subnet_cidr_block = local.public_subnet_cidr_block
 }
 
 module "autoscaling_group" {
@@ -45,9 +45,20 @@ module "autoscaling_group" {
   security_group_id = module.security_group.security_group_id
 }
 
+data "aws_instances" "created" {
+  filter {
+    name   = "instance.group-id"
+    values = [module.security_group.security_group_id]
+  }
+
+  depends_on = [
+    module.autoscaling_group
+  ]
+}
+
 module "security_group" {
   source = "./modules/security-group"
 
   name   = local.name
-  vpc_id = modules.vpc.vpc_id
+  vpc_id = module.vpc.vpc_id
 }
