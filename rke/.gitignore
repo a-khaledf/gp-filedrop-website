@@ -2,3 +2,4 @@
 terraform/sample
 
 kube_config_rke-cluster.yaml
+rke-cluster.rkestate
