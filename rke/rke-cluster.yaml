@@ -1,17 +1,17 @@
 cluster_name: glasswall
 nodes:
-  - address: 54.82.237.68
+  - address: 54.87.37.47
     internal_address: 11.11.11.5
     user: ubuntu
     role: [controlplane, worker, etcd]
     ssh_key_path: "./terraform/sample"
-  - address: 54.91.16.75
+  - address: 52.87.166.105
     internal_address: 11.11.11.9
     user: ubuntu
     role: [controlplane, worker, etcd]
     ssh_key_path: "./terraform/sample"
-  - address: 35.172.221.111
-    internal_address: 11.11.11.13
+  - address: 3.87.83.184
+    internal_address: 11.11.11.4
     user: ubuntu
     role: [controlplane, worker, etcd]
     ssh_key_path: "./terraform/sample"
