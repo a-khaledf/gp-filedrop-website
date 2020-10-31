@@ -36,6 +36,15 @@ module "vpc" {
   subnet_cidr_block = local.public_subnet_cidr_block
 }
 
+module "elb" {
+  source = "./modules/elb"
+
+  name                   = local.name
+  autoscaling_group_name = module.autoscaling_group.autoscaling_group_name
+  security_group_id      = module.security_group.security_group_id
+  subnet_id              = module.vpc.public_subnet_id
+}
+
 module "autoscaling_group" {
   source = "./modules/autoscaling-group"
 
